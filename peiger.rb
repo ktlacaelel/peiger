@@ -1,0 +1,6 @@
+require File.dirname(__FILE__) + '/peiger/peiger_error'
+require File.dirname(__FILE__) + '/peiger/item'
+require File.dirname(__FILE__) + '/peiger/item_repeated_error'
+require File.dirname(__FILE__) + '/peiger/collection'
+require File.dirname(__FILE__) + '/peiger/collection_repeated_error'
+require File.dirname(__FILE__) + '/peiger/base'
