@@ -125,7 +125,7 @@ module Peiger
         return selection
       end
       col = prev_collection(@selected_collection_id)
-      select col.item_ids.first, col.id
+      select col.item_ids.last, col.id
       return selection
     end
 

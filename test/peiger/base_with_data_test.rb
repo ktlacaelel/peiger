@@ -172,4 +172,19 @@ class BaseWithDataTest < Test::Unit::TestCase
     assert_equal expect, @base.prev
   end
 
+  #
+  #
+  def test_next_must_find_next_collection_and_first_item
+    @base.select 4, 1
+    expect = { :item_id => 1, :collection_id => 2 }
+    assert_equal expect, @base.next
+  end
+
+  def test_prev_must_find_prev_collection_and_last_item
+    @base.select 1, 3
+    expect = { :item_id => 4, :collection_id => 2 }
+    assert_equal expect, @base.prev
+  end
+
+
 end

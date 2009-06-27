@@ -125,23 +125,51 @@ class CollectionTest < Test::Unit::TestCase
     assert_equal false, @collection.has_order?(3)
   end
 
+  #
+  #
   def test_must_return_true_when_there_is_a_next_order
     @collection << Peiger::Item.new(2, 1)
     @collection << Peiger::Item.new(1, 0)
     assert @collection.next_order?(1)
   end
 
-  def test_must_return_false_when_there_is_no_next_order
-    @collection << Peiger::Item.new(1, 10)
-    @collection << Peiger::Item.new(2, 20)
-    @collection << Peiger::Item.new(4, 40)
-    @collection << Peiger::Item.new(3, 30)
-    assert_equal false, @collection.next_order?(4)
-    assert_equal false, @collection.next_order?(6)
-    assert_equal false, @collection.next_order?(-1)
+  def test_must_return_true_when_there_is_a_prev_order
+    @collection << Peiger::Item.new(2, 1)
+    @collection << Peiger::Item.new(1, 0)
+    assert @collection.prev_order?(2)
   end
 
-  def test_must_return_false_when_there_given_item_does_not_exist
+  #
+  # XXX TODO FIXME
+  # XXX TODO FIXME
+  # XXX TODO FIXME
+  #
+  def test_this_later
+    @collection << Peiger::Item.new(4, 4)
+    assert_equal false, @collection.next_order?(10)
+  end
+
+  #
+  #
+  def test_must_return_false_when_there_is_no_next_order
+    @collection << Peiger::Item.new(1, 1)
+    @collection << Peiger::Item.new(2, 2)
+    @collection << Peiger::Item.new(4, 4)
+    @collection << Peiger::Item.new(3, 3)
+    assert_equal false, @collection.next_order?(4)
+  end
+
+  def test_must_return_false_when_there_is_no_prev_order
+    @collection << Peiger::Item.new(2, 2)
+    @collection << Peiger::Item.new(4, 4)
+    @collection << Peiger::Item.new(1, 1)
+    @collection << Peiger::Item.new(3, 3)
+    assert_equal false, @collection.prev_order?(1)
+  end
+
+  #
+  #
+  def test_next_order_must_return_false_when_given_items_do_not_exist
     @collection << Peiger::Item.new(2, 1)
     @collection << Peiger::Item.new(1, 0)
     assert_equal false, @collection.next_order?(5)
@@ -149,11 +177,28 @@ class CollectionTest < Test::Unit::TestCase
     assert_equal false, @collection.next_order?(3)
   end
 
+  def test_prev_order_must_return_false_when_given_items_do_not_exist
+    @collection << Peiger::Item.new(2, 1)
+    @collection << Peiger::Item.new(1, 0)
+    assert_equal false, @collection.prev_order?(5)
+    assert_equal false, @collection.prev_order?(0)
+    assert_equal false, @collection.prev_order?(3)
+  end
+
+  #
+  #
   def test_must_get_next_ordered_item
     @collection << Peiger::Item.new(2, 1)
     @collection << Peiger::Item.new(1, 0)
     assert_equal true, @collection.next_order?(1)
     assert @collection.next_order(1).is_a?(Peiger::Item)
+  end
+
+  def test_must_get_prev_ordered_item
+    @collection << Peiger::Item.new(2, 1)
+    @collection << Peiger::Item.new(1, 0)
+    assert_equal true, @collection.prev_order?(2)
+    assert @collection.prev_order(2).is_a?(Peiger::Item)
   end
 
 end
